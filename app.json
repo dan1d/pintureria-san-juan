@@ -1,0 +1,31 @@
+{
+  "name": "Pintureria San Juan",
+  "description":"Pintureria San Juan",
+  "repository": "https://github.com/spree/spree",
+  "logo": "",
+  "keywords": [
+    "spree"
+  ],
+  "buildpacks": [
+    {"url": "https://github.com/spark-solutions/heroku-buildpack-spree.git"}
+  ],
+  "addons": [
+    "heroku-postgresql:hobby-dev",
+    "heroku-redis:hobby-dev",
+    "sendgrid:starter",
+    "memcachedcloud:30"
+  ],
+  "scripts": {
+    "postdeploy": "bundle exec rake db:migrate && bundle exec rake db:seed && SKIP_SAMPLE_IMAGES=true bundle exec rake spree_sample:load"
+  },
+  "env": {
+    "ADMIN_EMAIL": {
+      "description": "We will create an admin user with this email.",
+      "value": "spree@example.com"
+    },
+    "ADMIN_PASSWORD": {
+      "description": "We will create an admin user with this password.",
+      "value": "spree123"
+    }
+  }
+}
